@@ -1,0 +1,17 @@
+//https://leetcode.com/problems/majority-element/description/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int maxVal = 0, ans;
+        unordered_map<int , int> m;
+        for(int num : nums){
+            m[num]++;
+            if(maxVal < m[num]){
+                maxVal = m[num];
+                ans = num;
+            }
+        }
+        return ans;
+    }
+};

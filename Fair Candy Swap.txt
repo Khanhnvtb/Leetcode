@@ -1,0 +1,20 @@
+//https://leetcode.com/problems/fair-candy-swap/description/
+
+class Solution {
+public:
+    vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
+        unordered_map <int, int> m;
+        int s1 = 0, s2 = 0;
+        for(int i = 0;i < aliceSizes.size();i++){
+            s1 += aliceSizes[i];
+            m[aliceSizes[i]] = 1;
+        }
+        for(int i = 0;i < bobSizes.size();i++){
+            s2 += bobSizes[i];
+        }
+        int x = (s2 - s1) / 2;
+        for(int i = 0;i < bobSizes.size();i++)
+            if(m[bobSizes[i] - x] == 1) return {bobSizes[i] - x, bobSizes[i]};
+        return {};
+    }
+};

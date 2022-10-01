@@ -1,0 +1,25 @@
+//https://leetcode.com/problems/monotonic-array/description/
+
+class Solution {
+public:
+    bool isMonotonic(vector<int>& nums) {
+        int flat, i = 0;
+        while(i < nums.size() - 1){
+            if(nums[i] < nums[i + 1]) {
+                flat = 1;
+                break;
+            }
+            else if (nums[i] > nums[i + 1]) {
+                flat = -1;
+                break;
+            }
+            i++;
+        }
+        while(i < nums.size() - 1){
+            if(nums[i] < nums[i + 1] && flat == -1) return false;
+            if(nums[i] > nums[i + 1] && flat == 1) return false;
+            i++;
+        }
+        return true;
+    }
+};

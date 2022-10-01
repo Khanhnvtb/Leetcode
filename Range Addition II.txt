@@ -1,0 +1,13 @@
+//https://leetcode.com/problems/range-addition-ii/description/
+
+class Solution {
+public:
+    int maxCount(int m, int n, vector<vector<int>>& ops) {
+        int row = INT_MAX, col = INT_MAX;   
+        for(vector<int> v : ops){
+            if(v[0] < row) row = v[0];
+            if(v[1] < col) col = v[1];
+        }
+        return (row <= m && col <= n) ? row * col : m * n;
+    }
+};

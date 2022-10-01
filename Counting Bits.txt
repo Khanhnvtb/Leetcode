@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/counting-bits/description/
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> v;
+        int num, cnt;
+        for(int i = 0; i <= n; i++){
+            num = i;
+            cnt = 0;
+            while(num > 0){
+                cnt += num % 2;
+                num /= 2;
+            }
+            v.push_back(cnt);
+        }
+        return v;
+    }
+};

@@ -1,0 +1,39 @@
+//https://leetcode.com/problems/4sum/description/
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        vector<vector<int>> ans;
+        if(nums.size() < 4) return ans;
+        vector<int> a;
+        set<vector<int>> s;
+        unordered_map<int, int> m;
+        for(int i : nums) {
+            m[i]++;
+            if(m[i] < 5) a.push_back(i);
+        }
+        long long sum;
+        for(int i = 0; i < a.size() - 2; i++){
+            m[a[i]]--;
+            for(int j = i + 1; j < a.size() - 1; j++){
+                m[a[j]]--;
+                for(int k = j + 1; k < a.size(); k++){
+                    m[a[k]]--;
+                    sum = a[i];
+                    sum += a[j];
+                    sum += a[k];
+                    if(abs(sum) <= INT_MAX && m[target - sum] > 0) {
+                        vector<int> v = {a[i], a[j], a[k], target - (int) sum};
+                        sort(v.begin(), v.end());
+                        s.insert(v);
+                    }
+                    m[a[k]]++;
+                }
+                m[a[j]]++;
+            }
+            m[a[i]]++;
+        }
+        for(auto i : s) ans.push_back(i);
+        return ans;
+    }
+};

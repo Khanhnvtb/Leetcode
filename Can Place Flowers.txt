@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/can-place-flowers/description/
+
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        int cnt = 0, i = 0, flat = 0;
+        while(i < flowerbed.size()){
+            if(flowerbed[i] == 0) cnt ++;
+            else {
+                flat = 1;
+                break;
+            }
+            i++;
+        }
+        if(flat == 0) n -= (cnt + 1) / 2;
+        else n -= cnt / 2;
+        cnt = 0;
+        while(i < flowerbed.size()){
+            if(flowerbed[i] == 0) cnt ++;
+            else {
+                n -= (cnt - 1) / 2;
+                cnt = 0;
+            }
+            i++;
+        }
+        n -= cnt / 2;
+        return n <= 0;
+    }
+};

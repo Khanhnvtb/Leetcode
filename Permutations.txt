@@ -1,0 +1,30 @@
+//https://leetcode.com/problems/permutations/description/
+
+class Solution {
+public:
+    int n, used[6];
+    vector<int> repNums;
+    vector<vector<int>> ans;
+    void Try(int i, vector<int> v){
+        if(i == n){
+            ans.push_back(v);
+            return;
+        }
+        for(int j = 0; j < n; j++)
+            if(!used[j]){
+                v.push_back(repNums[j]);
+                used[j] = 1;
+                Try(i + 1, v);
+                v.pop_back();
+                used[j] = 0;
+            }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        n = nums.size();
+        repNums = nums;
+        vector<int> v;
+        for(int i = 0; i < 6; i++) used[i] = 0;
+        Try(0, v);
+        return ans;
+    }
+};

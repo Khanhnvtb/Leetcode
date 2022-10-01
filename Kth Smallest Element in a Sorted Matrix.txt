@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
+
+class Solution {
+public:
+    vector<int> mergeVector(vector<int> v1, vector<int>v2){
+        vector<int> v3(v1.size() + v2.size());
+        merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+        return v3;
+    }
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        vector<int> v;
+        for(int i = 0; i < matrix.size(); i++)
+            v = mergeVector(v, matrix[i]);
+        return v[k - 1];
+    }
+};

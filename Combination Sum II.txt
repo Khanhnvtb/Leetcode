@@ -1,0 +1,40 @@
+//https://leetcode.com/problems/combination-sum-ii/description/
+
+class Solution {
+public:
+    set<vector<int>> st;
+    vector<int> a;
+    int n, sum;
+    unordered_map<int, int> m;
+    void Try(int i, int s, int cnt, vector<int> v){
+        if(i == n) return;
+        Try(i + 1, s, 0, v);
+        cnt++;
+        if(cnt <= m[a[i]]){
+            s += a[i];
+            v.push_back(a[i]);
+            if(s == sum){
+                st.insert(v);
+                return;
+            }
+            if(s > sum) return;
+            Try(i, s, cnt, v);
+            Try(i + 1, s, cnt, v);
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) { 
+        set<int> ss;
+        for(int num : candidates){
+            m[num]++;
+            ss.insert(num);
+        }
+        for(auto it : ss) a.push_back(it);
+        sort(a.begin(), a.end());
+        n = a.size(), sum = target;
+        vector<int> v;
+        vector<vector<int>> ans;
+        Try(0, 0, 0, v);
+        for(auto it : st) ans.push_back(it);
+        return ans;
+    }
+};

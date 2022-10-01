@@ -1,0 +1,20 @@
+//https://leetcode.com/problems/target-sum/description/
+
+class Solution {
+public:
+    int ans = 0, sum, n;
+    vector<int> repNums;
+    void Try(int i, int s){
+        if(i == n){
+            if(s == sum) ans++;
+            return;
+        }
+        Try(i + 1, s + repNums[i]);
+        Try(i + 1, s - repNums[i]);
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        sum =target, n = nums.size(), repNums = nums;
+        Try(0, 0);
+        return ans;
+    }
+};

@@ -1,0 +1,47 @@
+//https://leetcode.com/problems/word-search/description/
+
+class Solution {
+public:
+    bool flag;
+    string s;
+    int dx[4] = {-1, 0, 0, 1};
+    int dy[4] = {0, -1, 1, 0};
+    int n, m, len;
+    vector<vector<char>> v;
+    int used[6][6];
+    bool check(int i, int j){
+        if(i < 0 || j < 0 || i == n || j == m) return false;
+        return true;
+    }
+    void Try(int i, int j, int index){
+        used[i][j] = 1;
+        if(index == len) flag = true;
+        if(flag) return;
+        for(int k = 0; k < 4; k++){
+            int x = i + dx[k];
+            int y = j + dy[k];
+            if(check(x, y) && used[x][y] == 0 && v[x][y] == s[index]) {
+                Try(x, y, index + 1);
+                used[x][y] = 0;
+            }
+        }
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        s = word;
+        v = board;
+        n = board.size(), m = board[0].size(), len = word.size();
+        flag = false;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                used[i][j] = 0;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++){
+                if(flag == true) return flag;
+                if(board[i][j] == word[0]) {
+                    Try(i, j, 1);
+                    used[i][j] = 0;
+                }
+            }
+        return flag;
+    }
+};

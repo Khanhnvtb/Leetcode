@@ -1,0 +1,35 @@
+//https://leetcode.com/problems/design-hashset/description/
+
+class MyHashSet {
+public:
+    vector<vector<int>> v;
+    MyHashSet() {
+        v.resize(1000001/100 + 1, vector<int> (100, -1));
+    }
+    
+    void add(int key) {
+        int num = key / 100;
+        int remain = key % 100;
+        v[num][remain] = 1;
+    }
+    
+    void remove(int key) {
+        int num = key / 100;
+        int remain = key % 100;
+        v[num][remain] = -1;
+    }
+    
+    bool contains(int key) {
+        int num = key / 100;
+        int remain = key % 100;
+        return v[num][remain] == 1;
+    }
+};
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
+ */

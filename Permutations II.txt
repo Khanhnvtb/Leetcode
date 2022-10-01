@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/permutations-ii/description/
+
+class Solution {
+public:
+    int n, used[8];
+    vector<int> repNums;
+    set<vector<int>> s;
+    void Try(int i, vector<int> v){
+        if(i == n){
+            s.insert(v);
+            return;
+        }
+        for(int j = 0; j < n; j++)
+            if(!used[j]){
+                v.push_back(repNums[j]);
+                used[j] = 1;
+                Try(i + 1, v);
+                v.pop_back();
+                used[j] = 0;
+            }
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        n = nums.size();
+        repNums = nums;
+        vector<int> v;
+        vector<vector<int>> ans;
+        for(int i = 0; i < 8; i++) used[i] = 0;
+        Try(0, v);
+        for(auto it : s) ans.push_back(it);
+        return ans;
+    }
+};

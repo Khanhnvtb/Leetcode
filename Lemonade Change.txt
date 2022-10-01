@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/lemonade-change/description/
+
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int used[11];
+        used[5] = 0, used[10] = 0;
+        for(int i = 0; i < bills.size(); i++)
+            if(bills[i] == 5) used[5]++;
+            else if(bills[i] == 10){
+                if(used[5] == 0) return false;
+                else{
+                    used[5]--;
+                    used[10]++;
+                }
+            }else{
+                if(used[10] != 0) {
+                    used[10]--;
+                    if(used[5] == 0) return false;
+                    else used[5]--;
+                }else{
+                    if(used[5] < 3) return false;
+                    else used[5] -= 3;
+                }
+            }
+        return true;
+    }
+};

@@ -1,0 +1,24 @@
+//https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
+class Solution {
+public:
+    vector<string> v = { "", "", "abc", "def","ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string> ans;
+    int n;
+    vector<int> a;
+    void Try(int i, string s){
+        if(i == n){
+            ans.push_back(s);
+            return;
+        }
+        for(char c : v[a[i]]) Try(i + 1, s + c);
+    }
+    vector<string> letterCombinations(string digits) {
+        if(digits != ""){
+            n = digits.length();
+            for(char c : digits) a.push_back(c - '0');
+            Try(0, "");
+        }
+        return ans;
+    }
+};

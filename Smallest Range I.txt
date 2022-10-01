@@ -1,0 +1,13 @@
+//https://leetcode.com/problems/smallest-range-i/description/
+
+class Solution {
+public:
+    int smallestRangeI(vector<int>& nums, int k) {
+        int low = nums[0], high = nums[0];
+        for(int i = 0; i < nums.size(); i++)
+            if(nums[i] < low) low = nums[i];
+            else if(nums[i] > high) high = nums[i];
+        if(2 * k >= high - low) return 0;
+        else return high - low - 2 * k;
+    }
+};

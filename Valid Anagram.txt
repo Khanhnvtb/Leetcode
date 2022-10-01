@@ -1,0 +1,14 @@
+//https://leetcode.com/problems/valid-anagram/description/
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.length() != t.length()) return false;
+        int used[150] = {0};
+        for(char c : s) used[c]++;
+        for(char c : t)
+            if(used[c] > 0) used[c]--;
+            else return false;
+        return true;
+    }
+};

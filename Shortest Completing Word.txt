@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/shortest-completing-word/description/
+
+class Solution {
+public:
+    string shortestCompletingWord(string licensePlate, vector<string>& words) {
+        unordered_map <int, int> m;
+        for(int i = 0;i<licensePlate.length();i++)
+            if(licensePlate[i] >= 'A' && licensePlate[i] <= 'Z') 
+                m[licensePlate[i] + 32]++;
+            else if(licensePlate[i] >= 'a' && licensePlate[i] <= 'z')
+                m[licensePlate[i]]++;
+            else continue;
+        int min = INT_MAX;
+        string res = "";
+        for(int i=0;i<words.size();i++){
+            if(words[i].length() < min){
+                unordered_map <int, int> mm;
+                for(int j=0;j<words[i].length();j++)
+                    if(words[i][j] >= 'A' && words[i][j] <= 'Z') 
+                        mm[words[i][j] + 32]++;
+                    else if(words[i][j] >= 'a' && words[i][j] <= 'z')
+                        mm[words[i][j]]++;
+                int check = 1;
+                for(auto j : m){
+                    if(j.second > mm[j.first]){
+                        check = 0;
+                        break;
+                    }
+                }
+                if(check == 1){
+                    min = words[i].length();
+                    res = words[i];
+                } 
+            }
+        }
+        return res;
+    }
+};

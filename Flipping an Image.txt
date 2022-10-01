@@ -1,0 +1,22 @@
+//https://leetcode.com/problems/flipping-an-image/description/
+
+int solve(int x){
+    if(x == 1) return 0;
+    return 1;
+}
+class Solution {
+public:
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) {
+        for(int i = 0;i<image.size();i++){
+            int l  = 0, r = image[i].size() - 1;
+            while(l <= r){
+                int tmp = image[i][l];
+                image[i][l] = solve(image[i][r]);
+                image[i][r] = solve(tmp);
+                l++;
+                r--;
+            }
+        }
+        return image;
+    }
+};

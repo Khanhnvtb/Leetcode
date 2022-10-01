@@ -1,0 +1,30 @@
+//https://leetcode.com/problems/add-binary/description/
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        if(a.length() < b.length()) swap(a, b);
+        int prev = 0, n = a.length() - 1, m = b.length() - 1;
+        while(m >= 0){
+            char c = a[n] + b[m] - '0' + prev;
+            if(c > '1') {
+                prev = 1;
+                c-= 2;
+            }else prev = 0;
+            a[n] = c;
+            n--;
+            m--;
+        }
+        while(n >= 0){
+            char c = a[n] + prev;
+            if(c > '1') {
+                prev = 1;
+                c-= 2;
+            }else prev = 0;
+            a[n] = c;
+            n--;
+        }
+        if(prev > 0) a = '1' + a;
+        return a;
+    }
+};

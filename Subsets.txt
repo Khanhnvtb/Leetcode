@@ -1,0 +1,24 @@
+//https://leetcode.com/problems/subsets/description/
+
+class Solution {
+public:
+    int n;
+    vector<vector<int>> ans;
+    vector<int> repNums;
+    void Try(int i, vector<int> v){
+        if(i == n) {
+            ans.push_back(v);
+            return;
+        }
+        Try(i + 1, v);
+        v.push_back(repNums[i]);
+        Try(i + 1, v);
+        v.pop_back();
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        repNums = nums, n = nums.size();
+        vector<int> v;
+        Try(0, v);
+        return ans;
+    }
+};

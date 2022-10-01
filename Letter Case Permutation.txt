@@ -1,0 +1,25 @@
+//https://leetcode.com/problems/letter-case-permutation/description/
+
+class Solution {
+public:
+    vector<string> v;
+    string str;
+    int n;
+    void Try(int i, string s){
+        if(i == n){
+            v.push_back(s);
+            return;
+        }
+        if(isdigit(str[i])) Try(i + 1, s + str[i]);
+        else {
+            Try(i + 1, s + (char) tolower(str[i]));
+            Try(i + 1, s + (char) toupper(str[i]));
+        }
+    }
+    vector<string> letterCasePermutation(string s) {
+        str = s;
+        n = s.length();
+        Try(0, "");
+        return v;
+    }
+};

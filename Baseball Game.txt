@@ -1,0 +1,36 @@
+//https://leetcode.com/problems/baseball-game/description/
+
+class Solution {
+public:
+    int toInt(string s){
+        int val = 0;
+        int i = 0;
+        if(s[i] == '-') i++;
+        while(i < s.size()){
+            val = val * 10 + s[i] - 48;
+            ++i;
+        }
+        if(s[0] == '-') return -val;
+        return val;
+    }
+    
+    int calPoints(vector<string>& ops) {
+        stack <int> l;
+        for(int i=0;i<ops.size();i++)
+            if(ops[i] == "C") l.pop();
+            else if(ops[i] == "D") l.push(l.top() * 2);
+            else if(ops[i] == "+"){
+                int x = l.top();
+                l.pop();
+                int y = x + l.top();
+                l.push(x);
+                l.push(y);
+            }else l.push(toInt(ops[i]));
+        int sum = 0;
+        while(!l.empty()){
+            sum += l.top();
+            l.pop();
+        }
+        return sum;
+    }
+};

@@ -1,0 +1,15 @@
+//https://leetcode.com/problems/find-k-closest-elements/description/
+
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        int s = 0, e = arr.size() - k, m;
+        while(s < e){
+            m = (s + e) / 2;
+            if(x - arr[m] > arr[m + k] - x) s = m + 1;
+            else e = m;
+        }
+        vector<int> ans(arr.begin() + s, arr.begin() + s + k);
+        return ans;
+    }
+};

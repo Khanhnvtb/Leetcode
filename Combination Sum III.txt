@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/combination-sum-iii/description/
+
+class Solution {
+public:
+    int used[10];
+    int size, sum, K;
+    vector<vector<int>> ans;
+    void Try(int i, int s, int prev, vector<int> v){
+        if(s == sum){
+            if(v.size() == K) ans.push_back(v);
+            return;
+        }
+        if(s > sum) return;
+        if(i == K) return;
+        for(int j = prev + 1; j <= size; j++){
+            if(!used[j]){
+                v.push_back(j);
+                used[j] = 1;
+                Try(i + 1, s + j, j, v);
+                v.pop_back();
+                used[j] = 0;
+            }
+        }
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        if(n < 10) size = n;
+        else size = 9;
+        K = k, sum = n;
+        for(int i = 1; i <= size; i++) used[i] = 0;
+        vector<int> v;
+        Try(0, 0, 0, v);
+        return ans;
+    }
+};

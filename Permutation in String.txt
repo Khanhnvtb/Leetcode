@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/permutation-in-string/description/
+
+class Solution {
+public:
+    bool check(unordered_map<char, int> m1, unordered_map<char, int>m2){
+        if(m1.size() != m2.size()) return false;
+        for(auto it : m1)
+            if(it.second != m2[it.first]) return false;
+        return true;
+    }
+    bool checkInclusion(string s1, string s2) {
+        if(s1.length() > s2.length()) return false;
+        unordered_map<char, int> m1;
+        unordered_map<char, int> m2;
+        for(int i = 0; i < s1.length(); i++){
+            m1[s1[i]]++;
+            m2[s2[i]]++;
+        }
+        int len = s2.length(), index = 0;
+        for(int i = s1.length(); i < len; i++){
+            if(check(m1, m2)) return true;
+            m2[s2[index]]--;
+            if(m2[s2[index]] == 0) m2.erase(s2[index]);
+            m2[s2[i]]++;
+            index++;
+        }
+        return check(m1, m2);
+    }
+};

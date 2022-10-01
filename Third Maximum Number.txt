@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/third-maximum-number/description/
+
+class Solution
+{
+    public:
+        int thirdMax(vector<int> &nums)
+        {
+            long long fMax = -2147483649, sMax = -2147483649, tMax = -2147483649;
+            for (int i = 0; i < nums.size(); i++)
+            {
+                if (nums[i] > fMax)
+                {
+                    tMax = sMax;
+                    sMax = fMax;
+                    fMax = nums[i];
+                }
+                else if (nums[i] > sMax && nums[i] < fMax)
+                {
+                    tMax = sMax;
+                    sMax = nums[i];
+                }
+                else if (nums[i] > tMax && nums[i] < sMax)
+                {
+                    tMax = nums[i];
+                }
+            }
+            int res;
+            if (tMax != -2147483649) res = tMax;
+            else res = fMax;
+            return res;
+        }
+};

@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/combinations/description/
+
+class Solution {
+public:
+    int N, K, used[25];
+    vector<vector<int>> ans;
+    void Try(int i, int prev, vector<int> v){
+        if(i == K){
+            ans.push_back(v);
+            return;
+        }
+        for(int j = prev + 1; j <= N; j++)
+            if(!used[j]){
+                v.push_back(j);
+                used[j] = 1;
+                Try(i + 1, j, v);
+                v.pop_back();
+                used[j] = 0;
+            }
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<int> v;
+        N = n, K = k;
+        for(int i = 1; i <= n; i++) used[i] = 0;
+        Try(0, 0, v);
+        return ans;
+    }
+};
