@@ -1,0 +1,48 @@
+//https://leetcode.com/problems/string-to-integer-atoi/description/
+
+class Solution {
+public:
+    bool isOperator(char c){
+        return (c == '+' || c == '-');
+    }
+    int myAtoi(string s) {
+        int i = 0;
+        int ans = 1;
+        while(i < s.length() && !isdigit(s[i])){
+            if(s[i] != ' ' && !isOperator(s[i])) return 0;
+            if(s[i] == '+'){
+                i++;
+                break;
+            }
+            else if(s[i] == '-'){
+                ans = -1;
+                i++;
+                break; 
+            }
+            i++;
+        }
+        if(ans == 0) ans = 1;
+        string num = "";
+        int j = i;
+        while(j < s.length()){
+            if(!isdigit(s[j])) break;
+            else num += s[j++];
+        }
+        i = 0;
+        while(i < num.length() && num[i] == '0') i++;
+        if(i == num.length()) return 0;
+        else ans *= num[i++] - 48;
+        int maxSize = INT_MAX / 10, minSize = INT_MIN / 10;
+        while(i < num.length()){
+            if(ans > maxSize) return INT_MAX;
+            else if(ans == maxSize && num[i] - 48 > INT_MAX - maxSize * 10) return INT_MAX;
+            else if(ans < minSize) return INT_MIN;
+            else if(ans == minSize && num[i] - 48 > minSize * 10 - INT_MIN) return INT_MIN;
+            ans *= 10;
+            if(ans > 0) ans = ans - 48 + num[i];
+            else ans = ans + 48 - num[i];
+            i++;
+        }
+        return ans;
+    }
+};
