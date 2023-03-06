@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/is-subsequence/description/
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int ls = 0, lt = 0, rs = s.length(), rt = t.length();
+        while(ls < rs && lt < rt){
+            if(s[ls] == t[lt]){
+                ls++;
+                lt++;
+            }else lt++;
+        }
+        if(ls == rs) return true;
+        return false;
+    }
+};
