@@ -1,0 +1,14 @@
+//https://leetcode.com/problems/ransom-note/description/
+
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int used[150] = {0};
+        for(char c : magazine) used[c]++;
+        for(char c : ransomNote){
+            if(used[c] > 0) used[c]--;
+            else return false;
+        }
+        return true;
+    }
+};
