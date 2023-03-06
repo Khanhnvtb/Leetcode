@@ -1,0 +1,14 @@
+//https://leetcode.com/problems/kth-missing-positive-number/description/
+
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int index = 0, pos = 0, n = arr.size(), used[1005] = {0};
+        for(int i = 1; i <= 2000; i ++){
+            if(index < n && arr[index] == i) index++;
+            else pos++;
+            if(pos == k) return i;
+        }
+        return 0;
+    }
+};
