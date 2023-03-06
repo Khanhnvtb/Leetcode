@@ -1,0 +1,14 @@
+//https://leetcode.com/problems/find-the-difference/description/
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int used[150] = {0};
+        for(char c : s) used[c]++;
+        for(char c : t){
+            if(used[c] == 0) return c;
+            else used[c]--;
+        }
+        return '^.^';
+    }
+};
