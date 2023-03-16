@@ -1,0 +1,12 @@
+//https://leetcode.com/problems/sales-person/
+
+# Write your MySQL query statement below
+
+SELECT name FROM(
+    SELECT s.name AS name, c.name AS c_name
+    FROM SalesPerson s
+    LEFT JOIN Orders o ON s.sales_id = o.sales_id
+    LEFT JOIN Company c ON c.com_id = o.com_id
+    GROUP BY name
+    HAVING c_name != "RED" OR c_name IS NULL
+) AS Temp
