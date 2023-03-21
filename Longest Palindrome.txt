@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/longest-palindrome/
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        unordered_map<int, int> m;
+        for(int i = 0; i < s.length(); i++)
+            m[s[i]]++;
+        int cnt = 0;
+        for(auto it : m)
+            if(m[it.first] % 2 == 1){
+                cnt = 1;
+                break;
+            }
+        for(auto it : m)
+            cnt += it.second / 2 * 2;
+        return cnt;
+    }
+};
