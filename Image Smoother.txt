@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/image-smoother/
+
+class Solution {
+public:
+    bool check(int x, int y, int row_size, int col_size){
+        if(x < 0 || y < 0 || x == row_size || y == col_size) return false;
+        return true;
+    }
+
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int dy[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+        int row_size = img.size();
+        int col_size = img[0].size();
+        vector<vector<int>> ans(row_size, vector<int>(col_size));
+        for(int i = 0; i < row_size; i++){
+            for(int j = 0; j < col_size; j++){
+                int cnt = 1, sum = img[i][j];
+                for(int k = 0; k < 8; k++){
+                    int row = i + dx[k];
+                    int col = j + dy[k];
+                    if(check(row, col, row_size, col_size)){
+                        cnt++;
+                        sum += img[row][col];
+                    }
+                }
+                ans[i][j] = sum / cnt;
+            }
+        }
+        return ans;
+    }
+};
