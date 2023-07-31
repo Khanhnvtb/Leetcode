@@ -1,0 +1,13 @@
+//https://leetcode.com/problems/rotate-string/
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        if(s.length() != goal.length()) return false;
+        int len = goal.length();
+        for(int i = 0; i < len; i++){
+            if(s == goal.substr(i) + goal.substr(0, i)) return true;
+        }
+        return false;
+    }
+};
