@@ -1,0 +1,25 @@
+//https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation
+
+class Solution {
+public:
+    bool isPrime(int n){
+        if(n < 2) return false;
+        for(int i = 2; i * i <= n; i++){
+            if(n % i == 0) return false;
+        }
+        return true;
+    }
+    int countPrimeSetBits(int left, int right) {
+        int ans = 0, cnt;
+        for(int i = left; i <= right; i++){
+            int tmp = i;
+            cnt  = 0;
+            while(tmp > 0){
+                cnt += tmp & 1;
+                tmp >>= 1;
+            }
+            if(isPrime(cnt)) ans += 1;
+        }
+        return ans;
+    }
+};
