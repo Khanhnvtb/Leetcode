@@ -1,0 +1,12 @@
+//https://leetcode.com/problems/jewels-and-stones
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        unordered_map<char, int> m;
+        int ans  = 0;
+        for(char c : jewels) m[c] = 1;
+        for(char c : stones) ans += m[c];
+        return ans;
+    }
+};
