@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/positions-of-large-groups
+
+class Solution {
+public:
+    vector<vector<int>> largeGroupPositions(string s) {
+        int start = 0, end;
+        vector<int> v(2);
+        vector<vector<int>> ans;
+        for(int i = 1; i < s.length(); i++){
+            if(s[i] != s[i - 1]){
+                end = i - 1;
+                if(end - start > 1){
+                    v[0] = start;
+                    v[1] = end;
+                    ans.push_back(v);
+                }
+                start = i;
+            }
+        }
+        end = s.length() - 1;
+        if(end - start > 1){
+            v[0] = start;
+            v[1] = end;
+            ans.push_back(v);
+        }
+        return ans;
+    }
+};
