@@ -1,0 +1,22 @@
+//https://leetcode.com/problems/binary-gap
+
+class Solution {
+public:
+    int binaryGap(int n) {
+        int ans = 0, index = 0, start = -1, end;
+        while(n > 0){
+            int tmp = n & 1;
+            if(tmp == 1){
+                if(start == -1) start = index;
+                else{
+                    end = index;
+                    ans = max(ans, end - start);
+                    start = index;
+                }
+            }
+            n >>= 1;
+            index += 1;
+        }
+        return ans;
+    }
+};
