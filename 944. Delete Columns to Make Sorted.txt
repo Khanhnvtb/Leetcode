@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/delete-columns-to-make-sorted
+
+class Solution {
+public:
+    bool check(vector<string>& strs, int index){
+        for(int i = 1; i < strs.size(); i++){
+            if(strs[i][index] < strs[i - 1][index]) return false;
+        }
+        return true;
+    }
+
+    int minDeletionSize(vector<string>& strs) {
+        int ans = 0, len = strs[0].length();
+        for(int i = 0; i < len; i++){
+            if(!check(strs, i)) ans++;
+        }
+        return ans;
+    }
+};
