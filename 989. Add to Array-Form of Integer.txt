@@ -1,0 +1,47 @@
+//https://leetcode.com/problems/add-to-array-form-of-integer
+
+class Solution {
+public:
+    vector<int> addToArrayForm(vector<int>& num, int k) {
+        int tmp = k, cnt = 0;
+        vector<int> v(5, 0);
+        while(tmp > 0){
+            v[cnt] = tmp % 10;
+            cnt++;
+            tmp /= 10;
+        }
+        int len = num.size(), size = num.size();
+        if(len < cnt) len = cnt + 1;
+        else len += 1;
+        int i = 0;
+        vector<int> ans(len, 0);
+        while(i < size && i < cnt){
+            int s = ans[i] + v[i] + num[size - i - 1];
+            if(s > 9){
+                ans[i] = s - 10;
+                ans[i + 1] += 1;
+            }else ans[i] = s;
+            i++;
+        }
+        while(i < size){
+            int s = ans[i] + num[size - i - 1];
+            if(s > 9){
+                ans[i] = s - 10;
+                ans[i + 1] += 1;
+            }else ans[i] = s;
+            i++;
+        }
+        while(i < cnt){
+            int s = ans[i] + v[i];
+            if(s > 9){
+                ans[i] = s - 10;
+                ans[i + 1] += 1;
+            }else ans[i] = s;
+            i++;
+        }
+        if(ans[len - 1] == 0) ans.pop_back();
+        int l = 0, r = ans.size() - 1;
+        while(l < r) swap(ans[l++], ans[r--]);
+        return ans;
+    }
+};
