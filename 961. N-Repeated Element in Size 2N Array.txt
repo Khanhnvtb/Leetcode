@@ -1,0 +1,12 @@
+//https://leetcode.com/problems/n-repeated-element-in-size-2n-array
+
+class Solution {
+public:
+    int repeatedNTimes(vector<int>& nums) {
+        int used[10005] = {0};
+        for(int i : nums)
+            if(used[i] == 1) return i;
+            else used[i] = 1;
+        return nums[0];
+    }
+};
