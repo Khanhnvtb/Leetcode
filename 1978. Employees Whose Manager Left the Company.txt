@@ -1,0 +1,11 @@
+//https://leetcode.com/problems/employees-whose-manager-left-the-company/description/
+
+/* Write your PL/SQL query statement below */
+select e1.employee_id
+from Employees e1
+where manager_id is not null and not exists (
+    select 1
+    from Employees e2
+    where e1.manager_id = e2.employee_id
+) and salary < 30000
+order by e1.employee_id
