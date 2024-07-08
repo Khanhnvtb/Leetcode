@@ -1,0 +1,17 @@
+//https://leetcode.com/problems/duplicate-zeros/description/
+
+class Solution {
+public:
+    void duplicateZeros(vector<int>& arr) {
+        vector<int> v = arr;
+        int i = 0, j = 0, len = v.size();
+        while(i < len){
+            if(v[j]) arr[i++] = v[j++];
+            else{
+                arr[i++] = 0;
+                if(i < len) arr[i++] = 0;
+                j++;
+            }
+        }
+    }
+};
