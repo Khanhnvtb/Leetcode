@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/description/
+
+/* Write your PL/SQL query statement below */
+select id, num from (
+    select id, count(*) num
+    from (
+        select requester_id id
+        from RequestAccepted
+        union all
+        select accepter_id id
+        from RequestAccepted
+    ) 
+    group by id
+    order by num desc
+)
+where rownum <= 1
