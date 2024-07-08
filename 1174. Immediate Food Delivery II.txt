@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/immediate-food-delivery-ii/description/
+
+/* Write your PL/SQL query statement below */
+with d as (
+    select d1.order_date, d1.customer_pref_delivery_date
+    from Delivery d1
+    join (
+        select customer_id, min(order_date) order_date
+        from Delivery
+        group by customer_id
+    ) d2 on d1.customer_id = d2.customer_id and d1.order_date = d2.order_date
+),
+d3 as (
+    select * from d 
+    where d.order_date = d.customer_pref_delivery_date
+)
+
+select round((select count(*) from d3) * 100 / (select count(*) from d), 2) immediate_percentage
+from dual
