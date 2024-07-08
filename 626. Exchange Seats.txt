@@ -1,0 +1,8 @@
+//https://leetcode.com/problems/exchange-seats/description/
+
+/* Write your PL/SQL query statement below */
+select s1.id, s2.student
+from Seat s1, Seat s2
+where (mod(s1.id, 2) = 1 and ((s1.id + 1 = s2.id) or (s1.id = (select count(*) from Seat) and s1.id = s2.id))) 
+or (mod(s1.id, 2) = 0 and s1.id - 1 = s2.id) 
+order by s1.id
