@@ -1,0 +1,12 @@
+//https://leetcode.com/problems/market-analysis-i/description/
+
+/* Write your PL/SQL query statement below */
+select u.user_id buyer_id, to_char(u.join_date, 'yyyy-mm-dd') join_date, coalesce(orders_in_2019, 0) orders_in_2019
+from Users u
+left join (
+    select buyer_id, count(order_id) orders_in_2019
+    from Orders o
+    where EXTRACT(YEAR FROM order_date) = 2019
+    group by o.buyer_id
+) on u.user_id = buyer_id
+
