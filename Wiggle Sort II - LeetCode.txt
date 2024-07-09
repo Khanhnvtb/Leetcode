@@ -1,0 +1,17 @@
+//https://leetcode.com/problems/wiggle-sort-ii/description/
+
+class Solution {
+public:
+    void wiggleSort(vector<int>& nums) {
+        vector<int> ans;
+        sort(nums.begin(), nums.end());
+        int l = nums.size() / 2 - 1, r = nums.size() - 1;
+        if(nums.size() % 2 == 1) l += 1;
+        int end = l;
+        while(l >= 0){
+            ans.push_back(nums[l--]);
+            if(r > end) ans.push_back(nums[r--]);
+        }
+        nums = ans;
+    }
+};
